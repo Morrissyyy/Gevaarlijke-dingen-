@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gevaarlijke dingen</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+</head>
+<body>
+
+<script src="javascript/scripts.js"></script>
+
+<div class="phone-screen">
+    <header>
+        <h1>Gevaarlijke dingen</h1>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+    </header>
+
+    <div class="table-container">
+        <table>
+            <tbody>
+            <tr>
+                <td>lvl</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>p1</td>
+                <td class="health-container">
+                    <span class="health-value" id="p1-health">30</span> /
+                    <span class="max-health">30</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeHealth('p1', -1)">-</button>
+                        <button class="change-button" onclick="changeHealth('p1', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>p2</td>
+                <td class="health-container">
+                    <span class="health-value" id="p2-health">30</span> /
+                    <span class="max-health">30</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeHealth('p2', -1)">-</button>
+                        <button class="change-button" onclick="changeHealth('p2', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>MNA</td>
+                <td class="health-container">
+                    <span class="health-value" id="mna-health">30</span> /
+                    <span class="max-health">30</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeMNAHealth(-1)">-</button>
+                        <button class="change-button" onclick="changeMNAHealth(1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>GLD</td>
+                <td class="health-container">
+                    <span class="gold-value" id="gld-value">1000</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeGold(-1)">-</button>
+                        <button class="change-button" onclick="changeGold(1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>XP</td>
+                <td class="health-container">
+                    <span class="health-value" id="xp-health">80</span> /
+                    <span class="max-health">80</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeXPHealth(-1)">-</button>
+                        <button class="change-button" onclick="changeXPHealth(1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr id="m1-row" style="cursor: pointer;" onclick="addMonster()">
+                <td>M1</td>
+                <td class="health-container">
+                    <span class="health-value" id="m1-health">15</span> /
+                    <span class="max-health">15</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeMonsterHealth('m1', -1)">-</button>
+                        <button class="change-button" onclick="changeMonsterHealth('m1', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr id="m2-row" style="display: none;" onclick="toggleMonster('m2')">
+                <td>M2</td>
+                <td class="health-container">
+                    <span class="health-value" id="m2-health">15</span> /
+                    <span class="max-health">15</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeMonsterHealth('m2', -1)">-</button>
+                        <button class="change-button" onclick="changeMonsterHealth('m2', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr id="m3-row" style="display: none;"  style="cursor: pointer;" onclick="toggleMonster('m3')">
+                <td>M3</td>
+                <td class="health-container">
+                    <span class="health-value" id="m3-health">15</span> /
+                    <span class="max-health">15</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeMonsterHealth('m3', -1)">-</button>
+                        <button class="change-button" onclick="changeMonsterHealth('m3', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr id="m4-row" style="display: none;"  style="cursor: pointer;" onclick="toggleMonster('m4')">
+                <td>M4</td>
+                <td class="health-container">
+                    <span class="health-value" id="m4-health">15</span> /
+                    <span class="max-health">15</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeMonsterHealth('m4', -1)">-</button>
+                        <button class="change-button" onclick="changeMonsterHealth('m4', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr id="m5-row" style="display: none;"  style="cursor: pointer;" onclick="toggleMonster('m5')">
+                <td>M5</td>
+                <td class="health-container">
+                    <span class="health-value" id="m5-health">15</span> /
+                    <span class="max-health">15</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeMonsterHealth('m5', -1)">-</button>
+                        <button class="change-button" onclick="changeMonsterHealth('m5', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr id="m6-row" style="display: none;"  style="cursor: pointer;" onclick="toggleMonster('m6')">
+                <td>M6</td>
+                <td class="health-container">
+                    <span class="health-value" id="m6-health">15</span> /
+                    <span class="max-health">15</span>
+                    <div class="button-group">
+                        <button class="change-button" onclick="changeMonsterHealth('m6', -1)">-</button>
+                        <button class="change-button" onclick="changeMonsterHealth('m6', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <footer>
+        <button class="counter-button" id="reset-monsters" onclick="resetMonstersHealth()">Reset Monsters</button>
+        <div class="counter-controls">
+            <button onclick="changePlayersHealth(-1)" class="counter-button">-</button>
+            <button onclick="changePlayersHealth(1)" class="counter-button">+</button>
+        </div>
+        <button onclick="resetPlayersHealth()" class="reset-button">0</button>
+    </footer>
+</div>
+
+</body>
+</html>
