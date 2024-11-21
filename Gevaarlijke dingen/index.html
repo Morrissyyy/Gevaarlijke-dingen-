@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gevaarlijke dingen</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <script src="javascript/scripts.js"></script>
+
+    <header>
+        <div class="level-display-container">
+            <span>Level</span>
+            <span id="level-display">1</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr>
+                        <div class="row"></div>
+                        <td>
+                            <img src="images/knight.png" alt="p1 icon" class="icon" onclick="setMaxHealth('p1')">
+                        </td>
+                        <td class="health-container">
+                            <div class="health-bar" id="p1-health-bar"></div>
+                            <span class="health-value" id="p1-health">30</span> /
+                            <span class="max-health" id="p1-max-health">30</span>
+                            <div class="button-group">
+                                <img src="images/minus.png" alt="minus" class="change-button" onclick="changeHealth('p1', -1)" 
+                                onmousedown="handleLongPress('p1', -1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleShortPress('p1', -1)">
+                                <img src="images/plus.png" alt="plus" class="change-button" onclick="changeHealth('p1', 1)" 
+                                onmousedown="handleLongPress('p1', 1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleShortPress('p1', 1)">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="images/wizard.png" alt="p2 icon" class="icon" onclick="setMaxHealth('p2')">
+                        </td>
+                        <td class="health-container">
+                            <div class="health-bar" id="p2-health-bar"></div>
+                            <span class="health-value" id="p2-health">30</span> /
+                            <span class="max-health" id="p2-max-health">30</span>
+                            <div class="button-group">
+                                <img src="images/minus.png" alt="minus" class="change-button" onclick="changeHealth('p2', -1)"
+                                onmousedown="handleLongPress('p2', -1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleShortPress('p2', -1)">
+                                <img src="images/plus.png" alt="plus" class="change-button" onclick="changeHealth('p2', 1)"                        
+                                onmousedown="handleLongPress('p2', 1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleShortPress('p2', 1)">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="images/chemical.png" alt="mna icon" class="icon" onclick="setMaxHealth('mna')">
+                        </td>
+                        <td class="health-container">
+                            <div class="mana-bar" id="mana-bar"></div> 
+                            <span class="health-value" id="mna-health">30</span> /
+                            <span class="max-health" id="mna-max-health">30</span>
+                            <div class="button-group">
+                                <img src="images/minus.png" alt="minus" class="change-button" onclick="changeMNAHealth(-1)"                 
+                                onmousedown="handleMNALongPress(-1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleMNAShortPress(-1)">
+                                <img src="images/plus.png" alt="plus" class="change-button" onclick="changeMNAHealth(1)"                 
+                                onmousedown="handleMNALongPress(1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleMNAShortPress(1)">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="images/star.png" alt="xp icon" class="icon">
+                        </td>
+                        <td class="health-container">
+                            <div class="xp-bar" id="xp-bar"></div>
+                            <span class="health-value" id="xp-health">0</span> / 
+                            <span class="max-health">40</span>
+                            <div class="button-group">
+                                <img src="images/minus.png" alt="minus" class="change-button" onclick="adjustXP(-1)"             
+                                onmousedown="handleXPLongPress(-1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleXPShortPress(-1)">
+                                <img src="images/plus.png" alt="plus" class="change-button" onclick="adjustXP(1)"             
+                                onmousedown="handleXPLongPress(1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleXPShortPress(1)">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="images/dragon.png" alt="m1 icon" class="icon" onclick="setMaxHealth('m1')">
+                        </td>
+                        <td class="health-container">
+                            <div class="health-bar" id="m1-health-bar"></div>
+                            <span class="health-value" id="m1-health">15</span> /
+                            <span class="max-health" id="m1-max-health">15</span>
+                            <div class="button-group">
+                                <img src="images/minus.png" alt="minus" class="change-button" onclick="changeMonsterHealth('m1', -1)"                 
+                                onmousedown="handleMonsterLongPress('m1', -1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleMonsterShortPress('m1', -1)">
+                                <img src="images/plus.png" alt="plus" class="change-button" onclick="changeMonsterHealth('m1', 1)"
+                                onmousedown="handleMonsterLongPress('m1', 1)" 
+                                onmouseup="clearLongPress()" 
+                                onmouseleave="clearLongPress()" 
+                                onclick="handleMonsterShortPress('m1', 1)">
+                            </div>
+                        </td>
+                    </tr>  
+                    <tr id="add-monster-row">
+                        <td>
+                            <img src="images/plus 2.png" class="Add-monster-plus" alt="Add monster plus" onclick="addMonster()">
+                        </td>
+                        <td>
+                            <div class="Add-monster" onclick="addMonster()">Add Monster</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="footer-bar">
+        <button class="counter-button" id="reset-monsters" onclick="resetMonstersHealth()"> <img src="images/circle-of-two-clockwise-arrows-rotation.png" alt="Reset Icon"></i></button>
+        <div class="counter-controls">
+            <button onclick="changePlayersHealth(-1)" class="counter-control-button minus"            
+            class="counter-control-button plus"
+            onmousedown="handleCounterLongPress(-1)" 
+            onmouseup="clearLongPress()" 
+            onmouseleave="clearLongPress()"> <i class="fas fa-minus"></i></button>
+            <div class="separator-line"></div> 
+            <button onclick="changePlayersHealth(+1)" class="counter-control-button plus" 
+            class="counter-control-button plus"
+            onmousedown="handleCounterLongPress(+1)" 
+            onmouseup="clearLongPress()" 
+            onmouseleave="clearLongPress()"><i class="fas fa-plus"></i></button>
+        </div>
+        <button class="reset-button" onclick="resetPlayersHealth()"><img src="images/bonfire.png" alt="Reset health Icon"></i></button>
+    </footer>
+</div>
+
+</body> 
+</html>

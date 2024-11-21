@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000;
+    font-family: 'Berkshire Swash', cursive;
+}
+
+.phone-screen {
+    width: 100%;
+    max-width: 393px;
+    height: calc(100vw * 2.17); /* Maintain aspect ratio */    
+    max-height: 852px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    background: linear-gradient(to bottom left, #97DDF0 47%, #3DA2FC);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'Berkshire Swash', cursive;
+}
+
+.table-container {
+    overflow-y: auto; 
+    overflow-x: hidden;
+    max-height: calc(100vh - 400px);
+}
+
+.level-display-container {
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 10px;
+    padding: 20px 0;
+    color: #000000;
+    font-family: 'Berkshire Swash', cursive;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    width: 75px; 
+    height: 75px;
+    cursor: pointer;
+}
+
+.change-button {
+    height: 55px;
+    width: 55px;
+    position: relative;
+    left: 185px;
+    top: -10px;
+}
+
+.health-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.health-container {
+    position: relative;
+    width: 100%;
+    font-size: 25px;
+}
+
+.health-bar {
+    width: 160px; 
+    height: 6px;
+    background-color: #4caf50; 
+    border-radius: 10px;
+    position: relative;
+    top: 51px;
+    left: 0;
+}
+
+.full-health {
+    background-color: #4caf50; 
+}
+
+.medium-health {
+    background-color: #ffeb3b; 
+}
+
+.low-health {
+    background-color: #f44336; 
+}
+
+.critical-health {
+    background-color: #9e1b32; 
+}
+
+.mana-bar {
+    width: 160px;
+    height: 6px;
+    background-color: #e0e0e0; 
+    border-radius: 10px;
+    position: relative;
+    top: 51px;
+    left: 0;
+}
+
+.full-mana {
+    background-color: #007AFF;
+}
+
+.low-mana {
+    background-color: #007AFF;
+}
+
+.critical-mana {
+    background-color: #007AFF; 
+}
+
+.xp-bar {
+    width: 0;
+    max-width: 160px;
+    height: 20px;
+    height: 6px;
+    background-color: #FFCC00; 
+    border-radius: 10px;
+    position: relative;
+    top: 51px;
+    left: 0;
+}
+
+.low-xp {
+    background-color: #FFCC00;
+}
+
+.critical-xp {
+    background-color: #FFCC00;
+}
+
+.full-xp {
+    background-color: #FFCC00;
+}
+
+
+.health-value {
+    margin-left: 10px;
+}
+
+.full-health {
+    background-color: #4caf50; 
+}
+
+.low-health {
+    background-color: #f44336;
+}
+
+.Add-monster-plus {
+    width: 55px; 
+    height: 55px;
+    cursor: pointer;
+    color: #484848;
+    position: relative;
+    left: 10px;
+}
+
+.Add-monster {
+    font-size: 25px;
+    color: #484848;
+    position: relative;
+    left: 10px;
+}
+
+.remove-monster-button {
+    font-size: 25px;
+    color: #ff1100;
+    position: absolute;
+    top: 10px;
+    left: 80px;
+    font-size: 30px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.footer-bar {
+    width: 377px; 
+    height: 79px; 
+    background-color: rgba(32, 80, 108, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 20px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3); 
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 85px;
+    justify-content: space-between;
+}
+
+.counter-controls {
+    display: flex;
+    gap: 10px;
+}
+
+#reset-monsters {
+    width: 56px;
+    height: 56px;
+    background-color: #ffffff; 
+    border: none;
+    border-radius: 15px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+#reset-monsters img {
+    width: 35px; 
+    height: 35px;
+}
+
+.counter-controls {
+    width: 150px;
+    height: 56px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: 0 auto; 
+    margin-left: 50px; 
+}
+
+.counter-control-button {
+    flex: 1;
+    height: 100%;
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 24px;
+    color: #FF5A5A;
+    display: flex;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+}
+
+.separator-line {
+    width: 1px;
+    height: 70%;
+    background-color: #000000;
+}
+
+.reset-button {
+    width: 56px;
+    height: 56px;
+    background-color: #ffffff; 
+    border: none;
+    border-radius: 15px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: box-shadow 0.3s ease;
+    position: absolute;
+    right: 10px;  
+}
+
+.reset-button:hover {
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4); 
+}
+
+.reset-button img {
+    width: 35px;
+    height: 35px;
+}
