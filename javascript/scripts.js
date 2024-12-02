@@ -20,11 +20,67 @@ document.addEventListener("DOMContentLoaded", function() {
     updateManaBar();
 });
 
-function changeMonsterHealth(monster, change) {
-    const maxHealthElement = document.getElementById(`${monster}-max-health`);
-    const maxHealth = parseInt(maxHealthElement.textContent);
-    
-    updateHealth(`${monster}-health`, change, maxHealth);
+function handleMonsterShortPress(monster, amount) {
+    changeMonsterHealth(monster, amount);
+}
+
+function handleMonsterLongPress(monster, amount) {
+    longPressTimeout = setTimeout(() => {
+        const userAmount = parseInt(prompt(`Enter the amount to change ${monster} health by:`), 10);
+
+        if (!isNaN(userAmount)) {
+            changeMonsterHealth(monster, userAmount * amount); 
+        }
+    }, 500); 
+}
+
+function resetMonstersHealth() {
+    const maxHealthElementM1 = document.getElementById('m1-max-health');
+    if (maxHealthElementM1) {
+        const maxHealthM1 = parseInt(maxHealthElementM1.textContent);
+
+        document.getElementById('m1-health').textContent = maxHealthM1;
+
+        updateMonsterHealthBar('m1', maxHealthM1, maxHealthM1);
+    } else {
+        console.warn('Max health element not found for m1');
+    }
+
+    const monsterRows = document.querySelectorAll('.table-container tbody tr[id^="m"]:not(#m1-row)');
+    monsterRows.forEach(row => {
+        const monsterId = row.id.split('-')[0]; 
+
+        const maxHealthElement = document.getElementById(`${monsterId}-max-health`);
+        if (maxHealthElement) {
+            const maxHealth = parseInt(maxHealthElement.textContent);
+
+            document.getElementById(`${monsterId}-health`).textContent = maxHealth;
+
+            updateMonsterHealthBar(monsterId, maxHealth, maxHealth);
+        } else {
+            console.warn(`Max health element not found for ${monsterId}`);
+        }
+    });
+}
+
+let longPressTimeout;
+
+function handleShortPress(player, amount) {
+    changeHealth(player, amount);
+}
+
+function handleLongPress(player, amount) {
+    longPressTimeout = setTimeout(() => {
+        const userAmount = parseInt(prompt("Enter the amount to change health by:"), 10);
+
+        if (!isNaN(userAmount)) {
+            changeHealth(player, userAmount * amount); 
+        }
+    }, 500);
+}
+
+function clearLongPress() {
+    clearTimeout(longPressTimeout);
 }
 
 function changeHealth(player, amount) {
@@ -32,15 +88,6 @@ function changeHealth(player, amount) {
     const maxHealth = parseInt(maxHealthElement.textContent);
     
     updateHealth(`${player}-health`, amount, maxHealth);
-}
-
-function resetMonstersHealth() {
-    const monsters = ['m1', 'm2', 'm3', 'm4', 'm5', 'm6'];
-    monsters.forEach(monster => {
-        document.getElementById(`${monster}-health`).textContent = 15;
-        
-        updateMonsterHealthBar(monster);
-    });
 }
 
     function changePlayersHealth(amount) {
@@ -57,15 +104,62 @@ function resetMonstersHealth() {
         });
     }
     
+    function handleCounterLongPress(amount) {
+        longPressTimeout = setTimeout(() => {
+            const userInput = prompt("Enter the amount to change by:", amount);
+            if (userInput !== null) {
+                let parsedAmount = parseInt(userInput);
+                if (!isNaN(parsedAmount)) {
+                    if (amount === -1 && parsedAmount > 0) {
+                        parsedAmount = -parsedAmount;
+                    }
+                    changePlayersHealth(parsedAmount);
+                }
+            }
+        }, 1000); 
+    }
+
+    function clearLongPress() {
+        clearTimeout(longPressTimeout);
+    }
+
+    function changePlayersHealth(amount) {
+        console.log(`Health changed by: ${amount}`);
+    }
+
     function resetPlayersHealth() {
         const players = ['p1', 'p2', 'mna'];
         players.forEach(player => {
-            document.getElementById(`${player}-health`).textContent = 30; 
+            const maxHealthElement = document.getElementById(`${player}-max-health`);
+            const maxHealth = parseInt(maxHealthElement.textContent);
+    
+            document.getElementById(`${player}-health`).textContent = maxHealth;
+    
+            if (player === 'mna') {
+                updateManaBar(); 
+            } else {
+                updateHealthBar(player);
+            }
         });
 
         updateHealthBar('p1');
         updateHealthBar('p2');
         updateManaBar();
+    }
+
+
+    function handleXPShortPress(amount) {
+        adjustXP(amount);
+    }
+    
+    function handleXPLongPress(amount) {
+        longPressTimeout = setTimeout(() => {   
+            const userAmount = parseInt(prompt("Enter the amount to adjust XP by:"), 10);
+    
+            if (!isNaN(userAmount)) {
+                adjustXP(userAmount * amount); 
+            }
+        }, 500);
     }
 
     function getMaxXP(level) {
@@ -139,28 +233,58 @@ function resetMonstersHealth() {
     function addMonster() {
         monsterCount++;
     
+        const monsterId = prompt("Enter the monster identifier (e.g., m2, m3, etc.):", `m${monsterCount}`);
+        if (!monsterId) {
+            alert("Monster identifier is required.");
+            return;
+        }
+    
+        const health = prompt("Enter the monster's health value:", "15");
+        if (!health || isNaN(health) || health <= 0) {
+            alert("Please enter a valid health value.");
+            return;
+        }
+    
         const monsterRow = document.createElement('tr');
-        monsterRow.id = `m${monsterCount}-row`;
+        monsterRow.id = `${monsterId}-row`;
         monsterRow.innerHTML = `
             <td>
-                <img src="images/dragon.png" alt="m1 icon" class="icon" onclick="setMaxHealth('m${monsterCount}')">
+                <span class="monster-number">${monsterId}</span>
+                <img src="images/dragon.png" alt="${monsterId} icon" class="icon" onclick="setMaxHealth('${monsterId}')">
             </td>
             <td class="health-container">
-                <div class="health-bar" id="m${monsterCount}-health-bar"></div>
-                <span class="health-value" id="m${monsterCount}-health">15</span> /
-                <span class="max-health" id="m${monsterCount}-max-health">15</span>
+                <div class="health-bar" id="${monsterId}-health-bar"></div>
+                <span class="health-value" id="${monsterId}-health">${health}</span> /
+                <span class="max-health" id="${monsterId}-max-health">${health}</span>
                 <div class="button-group">
-                    <img src="images/minus.png" alt="minus" class="change-button" onclick="changeMonsterHealth('m${monsterCount}', -1)">
-                    <img src="images/plus.png" alt="plus" class="change-button" onclick="changeMonsterHealth('m${monsterCount}', 1)">
-                    <a class="remove-monster-button" onclick="removeMonster(${monsterCount})"><i class="fas fa-minus"></i></a>
+                    <img src="images/minus.png" alt="minus" class="change-button" onclick="changeMonsterHealth('${monsterId}', -1)"                 
+                            onmousedown="handleMonsterLongPress('${monsterId}', -1)" 
+                            onmouseup="clearLongPress()" 
+                            onmouseleave="clearLongPress()" 
+                            onclick="handleMonsterShortPress('${monsterId}', -1)">
+                    <img src="images/plus.png" alt="plus" class="change-button" onclick="changeMonsterHealth('${monsterId}', 1)"                 
+                            onmousedown="handleMonsterLongPress('${monsterId}', 1)" 
+                            onmouseup="clearLongPress()" 
+                            onmouseleave="clearLongPress()" 
+                            onclick="handleMonsterShortPress('${monsterId}', 1)">
+                    <a class="remove-monster-button" onclick="removeMonster('${monsterId}')"><i class="fas fa-minus"></i></a>
                 </div>
             </td>
         `;
     
         const tableBody = document.querySelector('.table-container tbody');
-        tableBody.insertBefore(monsterRow, document.getElementById('add-monster-row')); 
+        tableBody.insertBefore(monsterRow, document.getElementById('add-monster-row'));
+    
+        saveMonsterState(monsterId, health);
+    
+        let monsterList = JSON.parse(localStorage.getItem('monsterList')) || [];
+        monsterList.push(monsterId);
+        localStorage.setItem('monsterList', JSON.stringify(monsterList));
+    
+        console.log(`Monster ${monsterId} added with health ${health}.`);
     }
-        
+    
+      
     function removeMonster(id) {
         const monsterRow = document.getElementById(`m${id}-row`);
         
@@ -215,12 +339,33 @@ function updateHealthBar(player) {
         healthBar.classList.remove("medium-health", "low-health", "full-health");
         healthBar.classList.add("critical-health");
     }
+
+    saveHealth(player);
 }
+
 
 window.onload = function() {
     updateHealthBar("p1");
     updateHealthBar("p2");
 };
+
+function handleMNAShortPress(amount) {
+    changeMNAHealth(amount);
+}
+
+function handleMNALongPress(amount) {
+    longPressTimeout = setTimeout(() => {
+        const userAmount = parseInt(prompt("Enter the amount to change MNA health by:"), 10);
+
+        if (!isNaN(userAmount)) {
+            changeMNAHealth(userAmount * amount); 
+        }
+    }, 500);
+}
+
+function clearLongPress() {
+    clearTimeout(longPressTimeout);
+}
 
 function updateManaBar() {
     const mana = parseInt(document.getElementById("mna-health").innerText);
@@ -229,17 +374,6 @@ function updateManaBar() {
     const manaBar = document.getElementById("mana-bar");
 
     manaBar.style.width = `${(manaPercentage / 100) * 160}px`;
-
-    if (mana >= 15) {
-        manaBar.classList.remove("low-mana", "critical-mana");
-        manaBar.classList.add("medium-mana", "full-mana");
-    } else if (mana >= 5) {
-        manaBar.classList.remove("medium-mana", "full-mana", "critical-mana");
-        manaBar.classList.add("low-mana");
-    } else {
-        manaBar.classList.remove("medium-mana", "low-mana", "full-mana");
-        manaBar.classList.add("critical-mana");
-    }
 }
 
 function updateMonsterHealthBar(monsterId) {
@@ -272,6 +406,13 @@ function changeMonsterHealth(monsterId, change) {
     if (newHealth > maxHealth) newHealth = maxHealth;
 
     document.getElementById(monsterId + "-health").innerText = newHealth;
+
+    const iconElement = document.querySelector(`#${monsterId}-health-bar`).closest("td").querySelector("img");
+    if (newHealth === 0) {
+        iconElement.src = "../images/danger.png";
+    } else {
+        iconElement.src = "../images/dragon.png";
+    }
 
     updateMonsterHealthBar(monsterId);
 }

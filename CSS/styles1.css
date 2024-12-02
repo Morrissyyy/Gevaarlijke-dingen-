@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
 body {
     margin: 0;
     display: flex;
@@ -5,7 +7,6 @@ body {
     min-height: 100vh;
     font-family: 'Berkshire Swash', cursive;
     background: linear-gradient(to bottom left, #97DDF0 47%, #3DA2FC);
-    padding-bottom: 0.521vw; 
 }
 
 header {
@@ -20,7 +21,6 @@ main {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 0.521vw; 
 }
 
 .table-container {
@@ -42,14 +42,14 @@ main {
 }
 
 .row {
-    text-align: center; 
+    text-align: center;
     display: flex;
     align-items: center;
 }
 
 .icon {
-    width: 5vw; 
-    height: 5vw;
+    width: 4vw; 
+    height: 4vw;
     cursor: pointer;
 }
 
@@ -58,31 +58,29 @@ main {
     width: 5%;
     position: relative;
     left: 90%;
-    top: -0.45em;
 }
 
 .health-bar-container {
     display: flex;
     position: relative;
     align-items: center;
-    gap: -5vh;
+    gap: 5%;
 }
 
 .health-container {
     right: 0;
     width: 100%;
     font-size: 2vw;
-    left: 5em;
 }
 
 .health-bar {
     width: 16vh; 
-    height: 0.8vh;
+    height: 0.6vh;
     background-color: #4caf50; 
-    border-radius: 50px;
+    border-radius: 10px;
     position: relative;
-    top: 2em;
-    left: 2em;
+    top: -100%;
+    left: 20;
 }
 
 .full-health {
@@ -103,23 +101,32 @@ main {
 
 .mana-bar {
     width: 16vh;
-    height: 0.8vh;
-    background-color: #007AFF; 
-    border-radius: 50px;
+    height: 0.6vh;
+    background-color: #e0e0e0; 
+    border-radius: 10px;
     position: relative;
-    top: 2em;
-    left: 2em;
+    top: 51%;
+}
+
+.full-mana {
+    background-color: #007AFF;
+}
+
+.low-mana {
+    background-color: #007AFF;
+}
+
+.critical-mana {
+    background-color: #007AFF; 
 }
 
 .xp-bar {
-    width: 0;
-    max-width: 16vh;
-    height: 0.8vh;
+    width: 16vh;
+    height: 0.6vh;
     background-color: #FFCC00; 
-    border-radius: 50px;
+    border-radius: 10px;
     position: relative;
-    top: 2em;
-    left: 2em;
+    top: 51%;
 }
 
 .low-xp {
@@ -136,7 +143,7 @@ main {
 
 
 .health-value {
-    margin-left: 0.521vw;
+    margin-left: 10px;
 }
 
 .full-health {
@@ -148,105 +155,66 @@ main {
 }
 
 .Add-monster-plus {
-    width: 4vw; 
-    height: 4vw;
+    width: 4vh; 
+    height: 4vh;
     cursor: pointer;
     color: #484848;
     position: relative;
-    left: 0.521vw;
+    left: 10%;
 }
 
 .Add-monster {
-    font-size: 2vw;
+    font-size: 25px;
     color: #484848;
     position: relative;
-    left: 0.521vw;
+    left: 10%;
 }
 
 .remove-monster-button {
-    color: red;
-    cursor: pointer;
-    margin-left: 0.521vw;
-    top: 1.563vw;
-}
-.remove-monster-button:hover {
-    color: darkred;
+    font-size: 2vw;
+    color: #ff1100;
+    position: absolute;
+    top: 10px;
+    left: 80px;
+    font-size: 2vw;
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 10; 
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .footer-bar {
-    width: 90%; 
-    max-width: 340px; 
-    height: 70px; 
+    width: 377px; 
+    height: 79px; 
     background-color: rgba(32, 80, 108, 0.8);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-radius: 15px; 
+    justify-content: space-around;
+    border-radius: 20px;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3); 
-    position: fixed;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 10px;
+    bottom: 85px;
+    justify-content: space-between;
 }
 
 .counter-controls {
     display: flex;
-    width: 140px; 
-    height: 50px; 
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-
-.counter-control-button {
-    width: 50%; 
-    height: 100%;
-    border: none;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    font-size: 22px; 
-    color: #FF5A5A;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.counter-control-button:hover {
-    background-color: #FFEBEB;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
-}
-
-.separator-line {
-    width: 1px;
-    height: 60%;
-    background-color: #000000;
-    margin: 0;
+    gap: 10px;
 }
 
 #reset-monsters {
-    width: 50px; 
-    height: 50px;
+    width: 56px;
+    height: 56px;
     background-color: #ffffff; 
     border: none;
-    border-radius: 12px; 
+    border-radius: 15px; 
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
     display: flex;
+    margin-left: 10px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -254,22 +222,60 @@ footer {
 }
 
 #reset-monsters img {
-    width: 30px; 
-    height: 30px;
+    width: 35px; 
+    height: 35px;
+}
+
+.counter-controls {
+    width: 150px;
+    height: 56px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: 0 auto; 
+    margin-left: 50px; 
+}
+
+.counter-control-button {
+    flex: 1;
+    height: 100%;
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 24px;
+    color: #FF5A5A;
+    display: flex;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+}
+
+.separator-line {
+    width: 1px;
+    height: 70%;
+    background-color: #000000;
 }
 
 .reset-button {
-    width: 50px; 
-    height: 50px;
+    width: 56px;
+    height: 56px;
     background-color: #ffffff; 
     border: none;
-    border-radius: 12px; 
+    border-radius: 15px; 
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    padding: 0;
     transition: box-shadow 0.3s ease;
+    position: absolute;
+    right: 10px;  
 }
 
 .reset-button:hover {
@@ -277,60 +283,6 @@ footer {
 }
 
 .reset-button img {
-    width: 30px; 
-    height: 30px;
-}
-
-@media (max-width: 600px) {
-    .footer-bar {
-        height: 65px;
-        border-radius: 12px;
-    }
-
-    #reset-monsters,
-    .reset-button {
-        width: 45px;
-        height: 45px;
-    }
-
-    #reset-monsters img,
-    .reset-button img {
-        width: 25px;
-        height: 25px;
-    }
-
-    .counter-controls {
-        height: 45px;
-    }
-
-    .counter-control-button {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 400px) {
-    .footer-bar {
-        height: 60px;
-        border-radius: 10px;
-    }
-
-    #reset-monsters,
-    .reset-button {
-        width: 40px;
-        height: 40px;
-    }
-
-    #reset-monsters img,
-    .reset-button img {
-        width: 24px;
-        height: 24px;
-    }
-
-    .counter-controls {
-        height: 40px;
-    }
-
-    .counter-control-button {
-        font-size: 16px;
-    }
+    width: 35px;
+    height: 35px;
 }
