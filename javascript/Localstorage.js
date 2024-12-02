@@ -162,25 +162,26 @@ function loadMana() {
 function loadXP() {
     const storedXP = parseInt(localStorage.getItem("xp-health"), 10) || 0;
     const storedLevel = parseInt(localStorage.getItem("level"), 10) || 1;
-    const storedMaxXP = parseInt(localStorage.getItem("max-xp"), 10); // Get stored maxXP without fallback
+    const storedMaxXP = parseInt(localStorage.getItem("max-xp"), 10);
 
     console.log("Loading XP data...");
     console.log("Stored XP:", storedXP);
     console.log("Stored Level:", storedLevel);
     console.log("Stored Max XP:", storedMaxXP);
 
-    // Use fallback only if storedMaxXP is null or undefined
     const maxXP = storedMaxXP !== null && !isNaN(storedMaxXP) ? storedMaxXP : getMaxXP(storedLevel);
 
     document.getElementById("xp-health").textContent = storedXP;
     document.getElementById("level-display").textContent = storedLevel;
-    document.querySelector(".max-health").textContent = maxXP;
+    document.getElementById("max-xp").textContent = maxXP;
 
     const xpBar = document.getElementById("xp-bar");
     xpBar.style.width = `${(storedXP / maxXP) * 100}%`;
 
     console.log(`Loaded XP state: xp=${storedXP}, level=${storedLevel}, maxXP=${maxXP}`);
 }
+
+
 
 
 
