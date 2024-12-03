@@ -10,7 +10,7 @@
 </head>
 <body>
     <script src="javascript/scripts.js"></script>
-    <script src="javascript/Localstorage.js"></script>
+    <script src="javascript/localstorage.js"></script>
 
     <header>
         <div class="level-display-container">
@@ -129,7 +129,7 @@
                                 <img src="images/plus.png" alt="plus" class="change-button" onclick="changeMonsterHealth('m1', 1)"
                                 onmousedown="handleMonsterLongPress('m1', 1)" 
                                 onmouseup="clearLongPress()" 
-                                onmouseleave="clearLongPress()" 
+                                onmouseleave="clearLongPress()"
                                 onclick="handleMonsterShortPress('m1', 1)">
                             </div>
                         </td>
@@ -148,23 +148,19 @@
     </main>
 
     <footer class="footer-bar">
-        <button class="counter-button" id="reset-monsters" onclick="resetMonstersHealth()"> <img src="images/circle-of-two-clockwise-arrows-rotation.png" alt="Reset Icon"></i></button>
+        <button class="counter-button" id="reset-monsters" onclick="resetMonstersHealth()"> <img src="images/circle-of-two-clockwise-arrows-rotation.png" alt="Reset Icon"></button>
         <div class="counter-controls">
-            <button onclick="changePlayersHealth(-1)" class="counter-control-button minus"            
-            class="counter-control-button plus"
+            <button onclick="changePlayersHealth(-1)" class="counter-control-button minus"
             onmousedown="handleCounterLongPress(-1)" 
             onmouseup="clearLongPress()" 
             onmouseleave="clearLongPress()"> <i class="fas fa-minus"></i></button>
             <div class="separator-line"></div> 
-            <button onclick="changePlayersHealth(+1)" class="counter-control-button plus" 
-            class="counter-control-button plus"
+            <button onclick="changePlayersHealth(+1)" class="counter-control-button plus"
             onmousedown="handleCounterLongPress(+1)" 
             onmouseup="clearLongPress()" 
             onmouseleave="clearLongPress()"><i class="fas fa-plus"></i></button>
         </div>
-        <button class="reset-button" onclick="resetPlayersHealth()"><img src="images/bonfire.png" alt="Reset health Icon"></i></button>
+        <button class="reset-button" onclick="resetPlayersHealth()"><img src="images/bonfire.png" alt="Reset health Icon"></button>
     </footer>
-</div>
-
 </body> 
 </html>

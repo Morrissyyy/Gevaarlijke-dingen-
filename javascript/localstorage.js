@@ -18,7 +18,6 @@ window.onload = function () {
 
 
 
-
 function saveHealth(playerId) {
     const healthValue = document.getElementById(`${playerId}-health`).textContent;
     const maxHealthValue = document.getElementById(`${playerId}-max-health`).textContent;
@@ -62,7 +61,6 @@ function saveXP() {
     console.log(`Saved XP state: xp=${xpValue}, level=${levelValue}, maxXP=${maxXP}, barWidth=${xpBarWidth}`);
 }
 
-
 function saveMonsterHealth(monsterId) {
     const healthValue = document.getElementById(`${monsterId}-health`).textContent;
     const maxHealthValue = document.getElementById(`${monsterId}-max-health`).textContent;
@@ -101,11 +99,6 @@ function saveMonsterState(monsterId, health) {
 
     console.log(`Saved ${monsterId} state: health=${health}, maxHealth=${maxHealth}, barWidth=${healthBarWidth}, classes=${healthBarClasses}`);
 }
-
-
-
-
-
 
 
 
@@ -265,43 +258,6 @@ function loadMonsters() {
 
 
 
-
-
-
-function changeHealth(playerId, amount) {
-    const healthElement = document.getElementById(`${playerId}-health`);
-    const maxHealth = parseInt(document.getElementById(`${playerId}-max-health`).textContent);
-    let currentHealth = parseInt(healthElement.textContent);
-
-    let newHealth = Math.max(0, Math.min(currentHealth + amount, maxHealth));
-    healthElement.textContent = newHealth;
-
-    updateHealthBar(playerId);
-}
-
-function changeMNAHealth(change) {
-    const maxManaElement = document.getElementById('mna-max-health');
-    const maxMana = parseInt(maxManaElement.textContent);
-
-    updateHealth('mna-health', change, maxMana);
-    updateManaBar();
-
-    saveMana();
-}
-
-function changeXP(amount) {
-    const xpElement = document.getElementById('xp-health');
-    let currentXP = parseInt(xpElement.textContent);
-
-    currentXP = Math.max(currentXP + amount, 0);
-    xpElement.textContent = currentXP;
-
-    levelUp();
-    updateXPBar();
-
-    saveXP();
-}
-
 function changeMonsterHealth(monsterId, change) {
     const currentHealth = parseInt(document.getElementById(monsterId + "-health").innerText);
     const maxHealth = parseInt(document.getElementById(monsterId + "-max-health").innerText);
@@ -336,39 +292,6 @@ function setMaxHealth(playerId) {
         updateHealthBar(playerId);
     }
 }
-
-function setMaxHealth(entity) {
-    const newMaxHealth = prompt(`Enter new max health for ${entity}:`);
-    if (newMaxHealth !== null && !isNaN(newMaxHealth) && parseInt(newMaxHealth) > 0) {
-        document.getElementById(`${entity}-max-health`).textContent = newMaxHealth;
-
-        const currentHealthElement = document.getElementById(`${entity}-health`);
-        const currentHealth = parseInt(currentHealthElement.textContent);
-        if (currentHealth > parseInt(newMaxHealth)) {
-            currentHealthElement.textContent = newMaxHealth;
-        }
-
-        if (entity === 'mna') {
-            saveMana(); 
-        }
-    }
-}
-
-function setMaxHealth(monsterId) {
-    const maxHealthElement = document.getElementById(`${monsterId}-max-health`);
-    let newMaxHealth = prompt("Enter new max health:", maxHealthElement.textContent);
-
-    if (newMaxHealth !== null && !isNaN(newMaxHealth) && newMaxHealth > 0) {
-        maxHealthElement.textContent = newMaxHealth;
-        updateMonsterHealthBar(monsterId);
-
-        saveMonsterHealth(monsterId);
-    }
-}
-
-
-
-
 
 function removeMonster(monsterId) {
     const monsterRow = document.getElementById(`${monsterId}-row`);

@@ -193,7 +193,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     border-radius: 15px; 
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3); 
+    box-shadow: 10px 10px rgba(0, 0, 0, 0.3);
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
@@ -208,7 +208,7 @@ footer {
     border-radius: 10px;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 6px rgba(0, 0, 0, 0.2);
     position: relative;
 }
 
@@ -229,7 +229,7 @@ footer {
 
 .counter-control-button:hover {
     background-color: #FFEBEB;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .separator-line {
@@ -245,7 +245,7 @@ footer {
     background-color: #ffffff; 
     border: none;
     border-radius: 12px; 
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
+    box-shadow: 4px 6px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -258,22 +258,8 @@ footer {
     height: 30px;
 }
 
-.reset-button {
-    width: 50px; 
-    height: 50px;
-    background-color: #ffffff; 
-    border: none;
-    border-radius: 12px; 
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-}
-
 .reset-button:hover {
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4); 
+    box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
 }
 
 .reset-button img {
@@ -285,6 +271,18 @@ footer {
     .footer-bar {
         height: 65px;
         border-radius: 12px;
+    }
+
+    @media screen and (max-width: 600px) {
+        button, .change-button, .remove-monster-button {
+            font-size: 9px;
+            width: 100%;
+        }
+
+        .change-button img, .remove-monster-button img {
+            width: 15px;
+            height: 15px;
+        }
     }
 
     #reset-monsters,
@@ -327,10 +325,10 @@ footer {
     }
 
     .counter-controls {
-        height: 40px;
+        height: 24px;
     }
 
     .counter-control-button {
-        font-size: 16px;
+        font-size: 8px;
     }
 }
