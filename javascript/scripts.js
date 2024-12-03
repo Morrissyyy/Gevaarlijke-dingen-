@@ -16,9 +16,9 @@ function changeMNAHealth(change) {
     updateManaBar();
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    updateManaBar();
-});
+// document.addEventListener("DOMContentLoaded", function() {
+//     updateManaBar();
+// });
 
 function handleMonsterShortPress(monster, amount) {
     changeMonsterHealth(monster, amount);
@@ -136,7 +136,7 @@ function changeHealth(player, amount) {
             document.getElementById(`${player}-health`).textContent = maxHealth;
     
             if (player === 'mna') {
-                updateManaBar(); 
+                updateManaBar();
             } else {
                 updateHealthBar(player);
             }
@@ -193,6 +193,8 @@ function changeHealth(player, amount) {
             xpBar.classList.remove("full-xp", "low-xp");
             xpBar.classList.add("critical-xp");
         }
+
+        saveXP()
     }
     
     function levelUp() {
@@ -374,7 +376,9 @@ function updateManaBar() {
     const manaBar = document.getElementById("mana-bar");
 
     manaBar.style.width = `${(manaPercentage / 100) * 160}px`;
+    saveMana(); // Save the updated mana state
 }
+
 
 function updateMonsterHealthBar(monsterId) {
     const health = parseInt(document.getElementById(monsterId + "-health").innerText);
@@ -430,33 +434,3 @@ function saveHealthState(playerId, healthValue) {
     localStorage.setItem(playerId + '-health', healthValue);
 }
 
-function loadHealthState(playerId, defaultHealth) {
-    const savedHealth = localStorage.getItem(playerId + '-health');
-    return savedHealth ? parseInt(savedHealth, 10) : defaultHealth;
-}
-
-function adjustHealth(playerId, amount) {
-    const healthBar = document.getElementById(playerId + '-health-bar');
-    const healthText = document.getElementById(playerId + '-health-text');
-
-    let newHealth = parseInt(healthBar.value) + amount;
-    newHealth = Math.max(0, Math.min(newHealth, healthBar.max)); 
-
-    healthBar.value = newHealth;
-    healthText.textContent = `${newHealth}/${healthBar.max}`;
-
-    saveHealthState(playerId, newHealth);
-}
-
-function restoreHealthBars() {
-    const p1Health = loadHealthState('p1', 30); 
-    const p2Health = loadHealthState('p2', 30); 
-
-    document.getElementById('p1-health-bar').value = p1Health;
-    document.getElementById('p1-health-text').textContent = `${p1Health}/100`;
-
-    document.getElementById('p2-health-bar').value = p2Health;
-    document.getElementById('p2-health-text').textContent = `${p2Health}/100`;
-}
-
-window.onload = restoreHealthBars;

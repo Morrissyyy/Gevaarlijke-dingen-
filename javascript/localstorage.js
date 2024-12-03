@@ -10,8 +10,6 @@ window.onload = function () {
     loadXP(); // Ensure loadXP is not dependent on data initialized in other functions
     loadMonsterHealth("m1");
     loadMonsters();
-
-    console.log("All data loaded successfully.");
 };
 
 
@@ -35,15 +33,15 @@ function saveHealth(playerId) {
 
 function saveMana() {
     const manaValue = document.getElementById("mna-health").textContent;
-    const maxManaValue = document.getElementById("mna-max-health").textContent;
+    const maxMana = document.getElementById("mna-max-health").textContent;
     const manaBar = document.getElementById("mana-bar");
     const manaBarWidth = manaBar.style.width;
 
-    localStorage.setItem("mna-health", manaValue);
-    localStorage.setItem("mna-max-health", maxManaValue);
-    localStorage.setItem("mana-bar-width", manaBarWidth);
+    console.log("Saving Mana:", manaValue, maxMana, manaBarWidth);
 
-    console.log(`Saved MNA mana: mana=${manaValue}, maxMana=${maxManaValue}, barWidth=${manaBarWidth}`);
+    localStorage.setItem("mna-health", manaValue);
+    localStorage.setItem("mna-max-health", maxMana);
+    localStorage.setItem("mana-bar-width", manaBarWidth);
 }
 
 function saveXP() {
@@ -136,31 +134,41 @@ function loadMana() {
     const storedMaxMana = localStorage.getItem("mna-max-health");
     const storedManaBarWidth = localStorage.getItem("mana-bar-width");
 
-    if (storedMana !== null) {
-        document.getElementById("mna-health").textContent = storedMana;
-    }
+    console.log("Loaded Mana data...");
+    console.log("Stored Mana:", storedMana);
+    console.log("Stored Max Mana:", storedMaxMana);
+    console.log("Stored Mana Bar Width:", storedManaBarWidth);
 
-    if (storedMaxMana !== null) {
-        document.getElementById("mna-max-health").textContent = storedMaxMana;
-    }
-
+    // Default values in case there's no stored data
+    const mana = storedMana ? parseInt(storedMana, 10) : 30;
+    const maxMana = storedMaxMana ? parseInt(storedMaxMana, 10) : 30; // Default 30
     const manaBar = document.getElementById("mana-bar");
-    if (storedManaBarWidth !== null) {
-        manaBar.style.width = storedManaBarWidth;
-    }
 
-    console.log(`Loaded MNA mana: mana=${storedMana}, maxMana=${storedMaxMana}, barWidth=${storedManaBarWidth}`);
+    // Update the health values on the page
+    document.getElementById("mna-health").textContent = mana;
+    document.getElementById("mna-max-health").textContent = maxMana;
+
+    console.log("Updated mna-health:", document.getElementById("mna-health").textContent);
+    console.log("Updated mna-max-health:", document.getElementById("mna-max-health").textContent);
+
+    if (storedManaBarWidth) {
+        manaBar.style.width = storedManaBarWidth;
+    } else {
+        updateManaBar(); // Recalculate the width if no stored value
+    }
 }
 
 function loadXP() {
     const storedXP = parseInt(localStorage.getItem("xp-health"), 10) || 0;
     const storedLevel = parseInt(localStorage.getItem("level"), 10) || 1;
     const storedMaxXP = parseInt(localStorage.getItem("max-xp"), 10);
+    const storedXPBarWidth = localStorage.getItem("xp-bar-width");
 
     console.log("Loading XP data...");
     console.log("Stored XP:", storedXP);
     console.log("Stored Level:", storedLevel);
     console.log("Stored Max XP:", storedMaxXP);
+    console.log("Stored XP Bar Width:", storedXPBarWidth);
 
     const maxXP = storedMaxXP !== null && !isNaN(storedMaxXP) ? storedMaxXP : getMaxXP(storedLevel);
 
@@ -169,7 +177,14 @@ function loadXP() {
     document.getElementById("max-xp").textContent = maxXP;
 
     const xpBar = document.getElementById("xp-bar");
-    xpBar.style.width = `${(storedXP / maxXP) * 100}%`;
+
+    // Use the stored width from localStorage if available
+    if (storedXPBarWidth) {
+        xpBar.style.width = storedXPBarWidth;
+    } else {
+        // If no stored width, calculate the width based on XP and max XP
+        xpBar.style.width = `${(storedXP / maxXP) * 100}%`;
+    }
 
     console.log(`Loaded XP state: xp=${storedXP}, level=${storedLevel}, maxXP=${maxXP}`);
 }
