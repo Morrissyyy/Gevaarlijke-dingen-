@@ -75,20 +75,18 @@ function saveMonsterHealth(monsterId) {
 }
 
 function saveMonsterState(monsterId, health) {
-    const maxHealth = health; 
+    const monsterList = JSON.parse(localStorage.getItem("monster-list")) || [];
 
-    localStorage.setItem(`${monsterId}-health`, health);
-    localStorage.setItem(`${monsterId}-max-health`, maxHealth);
-    localStorage.setItem(`${monsterId}-health-bar-width`, '100%'); 
-    localStorage.setItem(`${monsterId}-health-bar-classes`, '');
-    console.log(`Saved ${monsterId} state: health=${health}, maxHealth=${maxHealth}`);
-}
+    if (!monsterList.includes(monsterId)) {
+        monsterList.push(monsterId);
+        localStorage.setItem("monster-list", JSON.stringify(monsterList));
+        console.log(`Added new monster to the list: ${monsterId}`);
+    }
 
-function saveMonsterState(monsterId, health) {
     const healthBar = document.getElementById(`${monsterId}-health-bar`);
     const maxHealth = localStorage.getItem(`${monsterId}-max-health`) || health;
     const healthBarWidth = healthBar ? healthBar.style.width : '100%';
-    const healthBarClasses = healthBar ? Array.from(healthBar.classList).join(' ') : ''; 
+    const healthBarClasses = healthBar ? Array.from(healthBar.classList).join(' ') : '';
 
     localStorage.setItem(`${monsterId}-health`, health);
     localStorage.setItem(`${monsterId}-max-health`, maxHealth);

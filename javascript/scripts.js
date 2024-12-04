@@ -16,10 +16,6 @@ function changeMNAHealth(change) {
     updateManaBar();
 }
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     updateManaBar();
-// });
-
 function handleMonsterShortPress(monster, amount) {
     changeMonsterHealth(monster, amount);
 }
@@ -83,13 +79,6 @@ function clearLongPress() {
     clearTimeout(longPressTimeout);
 }
 
-function changeHealth(player, amount) {
-    const maxHealthElement = document.getElementById(`${player}-max-health`);
-    const maxHealth = parseInt(maxHealthElement.textContent);
-    
-    updateHealth(`${player}-health`, amount, maxHealth);
-}
-
     function changePlayersHealth(amount) {
         const players = ['p1', 'p2'];
     
@@ -117,14 +106,6 @@ function changeHealth(player, amount) {
                 }
             }
         }, 1000); 
-    }
-
-    function clearLongPress() {
-        clearTimeout(longPressTimeout);
-    }
-
-    function changePlayersHealth(amount) {
-        console.log(`Health changed by: ${amount}`);
     }
 
     function resetPlayersHealth() {
@@ -308,11 +289,6 @@ function changeHealth(player, amount) {
             }
         }
     }
-    
-function changePlayersHealth(amount) {
-    changeHealth('p1', amount);
-    changeHealth('p2', amount);
-}
 
 function changeHealth(player, amount) {
     const healthElement = document.getElementById(`${player}-health`);
@@ -363,10 +339,6 @@ function handleMNALongPress(amount) {
             changeMNAHealth(userAmount * amount); 
         }
     }, 500);
-}
-
-function clearLongPress() {
-    clearTimeout(longPressTimeout);
 }
 
 function updateManaBar() {
@@ -430,7 +402,4 @@ document.addEventListener("DOMContentLoaded", function() {
     updateMonsterHealthBar("m6");
 });
 
-function saveHealthState(playerId, healthValue) {
-    localStorage.setItem(playerId + '-health', healthValue);
-}
 
