@@ -1,3 +1,4 @@
+// update max health
 function updateHealth(elementId, change, maxHealth) {
     const healthSpan = document.getElementById(elementId);
     let currentHealth = parseInt(healthSpan.textContent);
@@ -7,6 +8,7 @@ function updateHealth(elementId, change, maxHealth) {
     healthSpan.textContent = currentHealth;
 }
 
+// update manan health
 function changeMNAHealth(change) {
     const maxManaElement = document.getElementById('mna-max-health');
     const maxMana = parseInt(maxManaElement.textContent);
@@ -30,6 +32,7 @@ function handleMonsterLongPress(monster, amount) {
     }, 500); 
 }
 
+// reset monster health
 function resetMonstersHealth() {
     const maxHealthElementM1 = document.getElementById('m1-max-health');
     if (maxHealthElementM1) {
@@ -79,6 +82,7 @@ function clearLongPress() {
     clearTimeout(longPressTimeout);
 }
 
+// change player health
     function changePlayersHealth(amount) {
         const players = ['p1', 'p2'];
     
@@ -108,6 +112,7 @@ function clearLongPress() {
         }, 1000); 
     }
 
+    // reset player health
     function resetPlayersHealth() {
         const players = ['p1', 'p2', 'mna'];
         players.forEach(player => {
@@ -143,6 +148,7 @@ function clearLongPress() {
         }, 500);
     }
 
+    // get max xp when leveling up
     function getMaxXP(level) {
         if (level === 1) return 40;    
         if (level === 2) return 80;   
@@ -150,7 +156,8 @@ function clearLongPress() {
         if (level === 4) return 320;   
         return 2 * getMaxXP(level - 1);
     }
-    
+
+    // update xp bar
     function updateXPBar() {
         const xp = parseInt(document.getElementById("xp-health").innerText);
         const levelElement = document.getElementById("level-display");
@@ -177,7 +184,8 @@ function clearLongPress() {
 
         saveXP()
     }
-    
+
+    // level up function
     function levelUp() {
         let xpElement = document.getElementById('xp-health');
         let levelElement = document.getElementById('level-display');
@@ -195,7 +203,8 @@ function clearLongPress() {
         let maxXPElem = xpElement.nextElementSibling;
         maxXPElem.textContent = getMaxXP(currentLevel);
     }
-    
+
+    // change xp
     function changeXP(amount) {
         const xpElement = document.getElementById('xp-health');
         let currentXP = parseInt(xpElement.textContent);
@@ -213,6 +222,7 @@ function clearLongPress() {
     
     let monsterCount = 1; 
 
+// add new monster
     function addMonster() {
         monsterCount++;
     
@@ -267,7 +277,7 @@ function clearLongPress() {
         console.log(`Monster ${monsterId} added with health ${health}.`);
     }
     
-      
+    // remove new added monsters
     function removeMonster(id) {
         const monsterRow = document.getElementById(`m${id}-row`);
         
@@ -276,7 +286,8 @@ function clearLongPress() {
             monsterCount--; 
         }
     }
-    
+
+    // set max health
     function setMaxHealth(entity) {
         const newMaxHealth = prompt(`Enter new max health for ${entity}:`);
         if (newMaxHealth !== null && !isNaN(newMaxHealth) && parseInt(newMaxHealth) > 0) {
@@ -290,6 +301,7 @@ function clearLongPress() {
         }
     }
 
+    // change player health
 function changeHealth(player, amount) {
     const healthElement = document.getElementById(`${player}-health`);
     let health = parseInt(healthElement.innerText);
@@ -299,6 +311,7 @@ function changeHealth(player, amount) {
     updateHealthBar(player); 
 }
 
+// update player health bar
 function updateHealthBar(player) {
     const health = parseInt(document.getElementById(`${player}-health`).innerText);
     const maxHealth = parseInt(document.getElementById(`${player}-max-health`).innerText);
@@ -341,6 +354,7 @@ function handleMNALongPress(amount) {
     }, 500);
 }
 
+// update mana bar
 function updateManaBar() {
     const mana = parseInt(document.getElementById("mna-health").innerText);
     const maxMana = parseInt(document.getElementById("mna-max-health").innerText);
@@ -351,7 +365,7 @@ function updateManaBar() {
     saveMana(); // Save the updated mana state
 }
 
-
+// update monster health bar
 function updateMonsterHealthBar(monsterId) {
     const health = parseInt(document.getElementById(monsterId + "-health").innerText);
     const maxHealth = parseInt(document.getElementById(monsterId + "-max-health").innerText);
@@ -372,6 +386,7 @@ function updateMonsterHealthBar(monsterId) {
     }
 }
 
+// change monster health
 function changeMonsterHealth(monsterId, change) {
     const currentHealth = parseInt(document.getElementById(monsterId + "-health").innerText);
     const maxHealth = parseInt(document.getElementById(monsterId + "-max-health").innerText);
@@ -401,5 +416,19 @@ document.addEventListener("DOMContentLoaded", function() {
     updateMonsterHealthBar("m5");
     updateMonsterHealthBar("m6");
 });
+
+// reset game
+function resetGame() {
+    const confirmation = confirm("Are you sure you want to reset the game? This will delete all progress!");
+    if (confirmation) {
+        localStorage.clear();
+        console.log("Game reset: All local storage data cleared.");
+        location.reload();
+    } else {
+        console.log("Game reset cancelled.");
+    }
+}
+
+document.getElementById("reset-game").addEventListener("click", resetGame);
 
 

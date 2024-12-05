@@ -1,3 +1,4 @@
+// Loading save
 window.onload = function () {
     console.log("Loading all saved data...");
 
@@ -12,10 +13,7 @@ window.onload = function () {
     loadMonsters();
 };
 
-
-
-
-
+// saving player health
 function saveHealth(playerId) {
     const healthValue = document.getElementById(`${playerId}-health`).textContent;
     const maxHealthValue = document.getElementById(`${playerId}-max-health`).textContent;
@@ -31,6 +29,7 @@ function saveHealth(playerId) {
     console.log(`Saved ${playerId} state: health=${healthValue}, maxHealth=${maxHealthValue}, barWidth=${healthBarWidth}, classes=${healthBarClasses}`);
 }
 
+// saving mana health
 function saveMana() {
     const manaValue = document.getElementById("mna-health").textContent;
     const maxMana = document.getElementById("mna-max-health").textContent;
@@ -44,6 +43,7 @@ function saveMana() {
     localStorage.setItem("mana-bar-width", manaBarWidth);
 }
 
+// save xp and level
 function saveXP() {
     const xpValue = document.getElementById("xp-health").textContent;
     const levelValue = document.getElementById("level-display").textContent;
@@ -59,6 +59,7 @@ function saveXP() {
     console.log(`Saved XP state: xp=${xpValue}, level=${levelValue}, maxXP=${maxXP}, barWidth=${xpBarWidth}`);
 }
 
+// save monster health
 function saveMonsterHealth(monsterId) {
     const healthValue = document.getElementById(`${monsterId}-health`).textContent;
     const maxHealthValue = document.getElementById(`${monsterId}-max-health`).textContent;
@@ -74,6 +75,7 @@ function saveMonsterHealth(monsterId) {
     console.log(`Saved ${monsterId} state: health=${healthValue}, maxHealth=${maxHealthValue}, barWidth=${healthBarWidth}, classes=${healthBarClasses}`);
 }
 
+// save monster state
 function saveMonsterState(monsterId, health) {
     const monsterList = JSON.parse(localStorage.getItem("monster-list")) || [];
 
@@ -96,10 +98,7 @@ function saveMonsterState(monsterId, health) {
     console.log(`Saved ${monsterId} state: health=${health}, maxHealth=${maxHealth}, barWidth=${healthBarWidth}, classes=${healthBarClasses}`);
 }
 
-
-
-
-
+// load player health
 function loadHealth(playerId) {
     const storedHealth = localStorage.getItem(`${playerId}-health`);
     const storedMaxHealth = localStorage.getItem(`${playerId}-max-health`);
@@ -127,6 +126,7 @@ function loadHealth(playerId) {
     console.log(`Loaded ${playerId} state: health=${storedHealth}, maxHealth=${storedMaxHealth}, barWidth=${storedHealthBarWidth}, classes=${storedHealthBarClasses}`);
 }
 
+// load mana
 function loadMana() {
     const storedMana = localStorage.getItem("mna-health");
     const storedMaxMana = localStorage.getItem("mna-max-health");
@@ -137,12 +137,10 @@ function loadMana() {
     console.log("Stored Max Mana:", storedMaxMana);
     console.log("Stored Mana Bar Width:", storedManaBarWidth);
 
-    // Default values in case there's no stored data
     const mana = storedMana ? parseInt(storedMana, 10) : 30;
-    const maxMana = storedMaxMana ? parseInt(storedMaxMana, 10) : 30; // Default 30
+    const maxMana = storedMaxMana ? parseInt(storedMaxMana, 10) : 30;
     const manaBar = document.getElementById("mana-bar");
 
-    // Update the health values on the page
     document.getElementById("mna-health").textContent = mana;
     document.getElementById("mna-max-health").textContent = maxMana;
 
@@ -152,10 +150,11 @@ function loadMana() {
     if (storedManaBarWidth) {
         manaBar.style.width = storedManaBarWidth;
     } else {
-        updateManaBar(); // Recalculate the width if no stored value
+        updateManaBar();
     }
 }
 
+// loading xp and level
 function loadXP() {
     const storedXP = parseInt(localStorage.getItem("xp-health"), 10) || 0;
     const storedLevel = parseInt(localStorage.getItem("level"), 10) || 1;
@@ -176,22 +175,16 @@ function loadXP() {
 
     const xpBar = document.getElementById("xp-bar");
 
-    // Use the stored width from localStorage if available
     if (storedXPBarWidth) {
         xpBar.style.width = storedXPBarWidth;
     } else {
-        // If no stored width, calculate the width based on XP and max XP
         xpBar.style.width = `${(storedXP / maxXP) * 100}%`;
     }
 
     console.log(`Loaded XP state: xp=${storedXP}, level=${storedLevel}, maxXP=${maxXP}`);
 }
 
-
-
-
-
-
+// loading monster health
 function loadMonsterHealth(monsterId) {
     const storedHealth = localStorage.getItem(`${monsterId}-health`);
     const storedMaxHealth = localStorage.getItem(`${monsterId}-max-health`);
@@ -219,6 +212,7 @@ function loadMonsterHealth(monsterId) {
     console.log(`Loaded ${monsterId} state: health=${storedHealth}, maxHealth=${storedMaxHealth}, barWidth=${storedHealthBarWidth}, classes=${storedHealthBarClasses}`);
 }
 
+// loading added monsters
 function loadMonsters() {
     const monsterList = JSON.parse(localStorage.getItem('monsterList')) || [];
 
@@ -265,12 +259,7 @@ function loadMonsters() {
     console.log(`Loaded all monsters: ${monsterList.join(', ')}`);
 }
 
-
-
-
-
-
-
+// change monster health
 function changeMonsterHealth(monsterId, change) {
     const currentHealth = parseInt(document.getElementById(monsterId + "-health").innerText);
     const maxHealth = parseInt(document.getElementById(monsterId + "-max-health").innerText);
@@ -287,15 +276,7 @@ function changeMonsterHealth(monsterId, change) {
     saveMonsterHealth(monsterId);
 }
 
-
-
-
-
-
-
-
-
-
+// set max health players
 function setMaxHealth(playerId) {
     const maxHealthElement = document.getElementById(`${playerId}-max-health`);
     let newMaxHealth = prompt("Enter new max health:", maxHealthElement.textContent);
@@ -306,6 +287,7 @@ function setMaxHealth(playerId) {
     }
 }
 
+// remove added monsters
 function removeMonster(monsterId) {
     const monsterRow = document.getElementById(`${monsterId}-row`);
 
