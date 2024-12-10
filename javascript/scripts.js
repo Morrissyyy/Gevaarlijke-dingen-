@@ -8,7 +8,7 @@ function updateHealth(elementId, change, maxHealth) {
     healthSpan.textContent = currentHealth;
 }
 
-// update manan health
+// update mana health
 function changeMNAHealth(change) {
     const maxManaElement = document.getElementById('mna-max-health');
     const maxMana = parseInt(maxManaElement.textContent);
@@ -117,9 +117,8 @@ function clearLongPress() {
         const players = ['p1', 'p2', 'mna'];
         players.forEach(player => {
             const maxHealthElement = document.getElementById(`${player}-max-health`);
-            const maxHealth = parseInt(maxHealthElement.textContent);
-    
-            document.getElementById(`${player}-health`).textContent = maxHealth;
+
+            document.getElementById(`${player}-health`).textContent = maxHealthElement.textContent;
     
             if (player === 'mna') {
                 updateManaBar();
@@ -231,12 +230,13 @@ function clearLongPress() {
             alert("Monster identifier is required.");
             return;
         }
-    
-        const health = prompt("Enter the monster's health value:", "15");
-        if (!health || isNaN(health) || health <= 0) {
+
+        const health = parseInt(prompt("Enter the monster's health value:", "15"), 10); // Convert to an integer
+        if (isNaN(health) || health <= 0) {
             alert("Please enter a valid health value.");
             return;
         }
+
     
         const monsterRow = document.createElement('tr');
         monsterRow.id = `${monsterId}-row`;
@@ -288,18 +288,24 @@ function clearLongPress() {
     }
 
     // set max health
-    function setMaxHealth(entity) {
-        const newMaxHealth = prompt(`Enter new max health for ${entity}:`);
-        if (newMaxHealth !== null && !isNaN(newMaxHealth) && parseInt(newMaxHealth) > 0) {
-            document.getElementById(`${entity}-max-health`).textContent = newMaxHealth;
-            const currentHealthElement = document.getElementById(`${entity}-health`);
+function setMaxHealth(entity) {
+    const newMaxHealthInput = prompt(`Enter new max health for ${entity}:`);
+    const newMaxHealth = newMaxHealthInput !== null ? parseInt(newMaxHealthInput, 10) : NaN;
 
-            const currentHealth = parseInt(currentHealthElement.textContent);
-            if (currentHealth > parseInt(newMaxHealth)) {
-                currentHealthElement.textContent = newMaxHealth;
-            }
+    if (!isNaN(newMaxHealth) && newMaxHealth > 0) {
+        document.getElementById(`${entity}-max-health`).textContent = newMaxHealth;
+
+        const currentHealthElement = document.getElementById(`${entity}-health`);
+        const currentHealth = parseInt(currentHealthElement.textContent, 10);
+
+        if (currentHealth > newMaxHealth) {
+            currentHealthElement.textContent = newMaxHealth;
         }
+    } else {
+        alert("Please enter a valid positive number.");
     }
+}
+
 
     // change player health
 function changeHealth(player, amount) {
@@ -384,28 +390,6 @@ function updateMonsterHealthBar(monsterId) {
         healthBar.classList.remove("medium-health", "low-health", "full-health");
         healthBar.classList.add("critical-health");
     }
-}
-
-// change monster health
-function changeMonsterHealth(monsterId, change) {
-    const currentHealth = parseInt(document.getElementById(monsterId + "-health").innerText);
-    const maxHealth = parseInt(document.getElementById(monsterId + "-max-health").innerText);
-
-    let newHealth = currentHealth + change;
-
-    if (newHealth < 0) newHealth = 0;
-    if (newHealth > maxHealth) newHealth = maxHealth;
-
-    document.getElementById(monsterId + "-health").innerText = newHealth;
-
-    const iconElement = document.querySelector(`#${monsterId}-health-bar`).closest("td").querySelector("img");
-    if (newHealth === 0) {
-        iconElement.src = "../images/danger.png";
-    } else {
-        iconElement.src = "../images/dragon.png";
-    }
-
-    updateMonsterHealthBar(monsterId);
 }
 
 document.addEventListener("DOMContentLoaded", function() {

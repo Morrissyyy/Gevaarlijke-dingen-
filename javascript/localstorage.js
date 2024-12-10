@@ -281,9 +281,13 @@ function setMaxHealth(playerId) {
     const maxHealthElement = document.getElementById(`${playerId}-max-health`);
     let newMaxHealth = prompt("Enter new max health:", maxHealthElement.textContent);
 
-    if (newMaxHealth !== null && !isNaN(newMaxHealth) && newMaxHealth > 0) {
+    newMaxHealth = parseFloat(newMaxHealth);
+
+    if (!isNaN(newMaxHealth) && newMaxHealth > 0) {
         maxHealthElement.textContent = newMaxHealth;
         updateHealthBar(playerId);
+    } else {
+        alert("Please enter a valid positive number for max health.");
     }
 }
 
