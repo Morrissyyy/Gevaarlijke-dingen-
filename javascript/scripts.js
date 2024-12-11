@@ -401,18 +401,4 @@ document.addEventListener("DOMContentLoaded", function() {
     updateMonsterHealthBar("m6");
 });
 
-// reset game
-function resetGame() {
-    const confirmation = confirm("Are you sure you want to reset the game? This will delete all progress!");
-    if (confirmation) {
-        localStorage.clear();
-        console.log("Game reset: All local storage data cleared.");
-        location.reload();
-    } else {
-        console.log("Game reset cancelled.");
-    }
-}
-
-document.getElementById("reset-game").addEventListener("click", resetGame);
-
 
